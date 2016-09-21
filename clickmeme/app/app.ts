@@ -4,6 +4,8 @@ import { Splashscreen } from 'ionic-native';
 import {LoginPage} from './pages/login/login';
 import {HomePage} from './pages/home/home';
 
+declare var firebase: any;
+
 @Component({
     templateUrl: 'build/app.html'
 })
@@ -13,6 +15,10 @@ class MyApp {
 
     constructor(platform: Platform) {
         platform.ready().then((readySource) => {
+            firebase.auth().signInAnonymously().catch(function(error) {
+                console.error(error.code);
+                console.error(error.message);
+            });
         });
     }
 }

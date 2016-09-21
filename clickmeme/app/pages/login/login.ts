@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController} from 'ionic-angular';
+import { Http, Response } from '@angular/http';
 import {HomePage} from '../home/home'
 
 @Component({
@@ -7,7 +8,7 @@ import {HomePage} from '../home/home'
 })
 export class LoginPage {
 
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController, http: Http) {
   }
 
   login() {

@@ -34,6 +34,18 @@
   <!-- Zone.js and Reflect-metadata  -->
   <script src="build/js/Reflect.js"></script>
   <script src="build/js/zone.js"></script>
+	<script src="firebase-3.4.0.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyA3HJ2M9WKReoyevpm0lqon_AVnDMrlGAQ",
+			authDomain: "clickmeme-2f0a0.firebaseapp.com",
+			databaseURL: "https://clickmeme-2f0a0.firebaseio.com",
+			storageBucket: "clickmeme-2f0a0.appspot.com",
+			messagingSenderId: "510981237390"
+		};
+		firebase.initializeApp(config);
+	</script>
   <!-- The bundle which is built from the app's source code -->
   <script src="build/js/app.bundle.js"></script>
 </body>
