@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, ionicBootstrap } from 'ionic-angular';
+import { Splashscreen } from 'ionic-native';
 import {LoginPage} from './pages/login/login';
 import {HomePage} from './pages/home/home';
 
@@ -10,7 +11,9 @@ class MyApp {
 
     rootPage: any = LoginPage;
 
-    constructor() {
+    constructor(platform: Platform) {
+        platform.ready().then((readySource) => {
+        });
     }
 }
 
