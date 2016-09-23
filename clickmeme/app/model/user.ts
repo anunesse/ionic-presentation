@@ -4,7 +4,7 @@ export class User {
     avatar: number;
     deviceProperties: string;
 
-    minTime: number;
-    points: number;
-    click: number;
+    minTime: number = 10000;
+    points: number = 0;
+    click: number = 0;
 }
