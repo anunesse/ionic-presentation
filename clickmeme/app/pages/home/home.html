@@ -1,66 +1,42 @@
 <ion-header>
-	<ion-navbar>
+	<ion-toolbar>
+    	<ion-icon name="menu" menuToggle></ion-icon>
 		<ion-title>
 			Home
 		</ion-title>
-	</ion-navbar>
+  	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-grid>
+	<h3 *ngIf="user">{{user.pseudo}} | {{user.points}}pts</h3>
+	<ion-grid *ngIf="!out">
 		<ion-row>
-			<ion-col width-33>
-				<ion-card>
-					<button (click)="win()">01</button>
-				</ion-card>
-			</ion-col>
-			<ion-col width-33>
-				<ion-card>
-					<!--<img src="{{grid.loosePic}}">-->
-					<img src="build/img/12.jpg">
-				</ion-card>
-			</ion-col>
-			<ion-col width-33>
-				<ion-card>
-					03
+			<ion-col *ngFor="let i of [1, 2, 3]" width-33>
+				<ion-card (click)="win(i)">
+					<img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
 				</ion-card>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
-			<ion-col width-33>
-				<ion-card>
-					04
-				</ion-card>
-			</ion-col>
-			<ion-col width-33>
-				<ion-card>
-					05
-				</ion-card>
-			</ion-col>
-			<ion-col width-33>
-				<ion-card>
-					06
+			<ion-col *ngFor="let i of [4, 5, 6]" width-33>
+				<ion-card (click)="win(i)">
+					<img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
 				</ion-card>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
-			<ion-col width-33>
-				<ion-card>
-					07
-				</ion-card>
-			</ion-col>
-			<ion-col width-33>
-				<ion-card>
-					08
-				</ion-card>
-			</ion-col>
-			<ion-col width-33>
-				<ion-card>
-					09
+			<ion-col *ngFor="let i of [7, 8, 9]" width-33>
+				<ion-card (click)="win(i)">
+					<img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
 				</ion-card>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
+	<ion-spinner *ngIf="out"></ion-spinner>
+
+	<div *ngIf="user" class="minTime">
+		<p>Best time : {{user.minTime}}</p>
+	</div>
 </ion-content>

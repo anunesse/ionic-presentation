@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { User } from '../../model/user';
+import { AppService } from '../../app.service';
 
 declare var firebase: any;
 
 @Component({
-  templateUrl: 'build/pages/profile/profile.html'
+  templateUrl: 'build/pages/profile/profile.html',
+  providers: [AppService]
 })
 export class ProfilePage {
-    public login: {};
+    public user: User;
 
-    constructor(private navCtrl: NavController, navParams: NavParams) {
-        firebase.database().ref('/users/' + 1).once('value').then(function(snapshot) {
-            this.login = snapshot.val();
+    constructor(private navCtrl: NavController, navParams: NavParams, private appService: AppService) {
+        this.appService.getStorage().getJson('id').then((data) => {
+            this.user = data;
+        }).catch((ex) => {
+            console.error('Error fetching user', ex);
         });
-    }
-
-    goToHomePage() {
-        this.navCtrl.push(HomePage);
     }
 }

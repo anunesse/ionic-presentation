@@ -7,14 +7,19 @@
 
 	<ion-content>
 		<ion-list>
-			<button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-			{{p.title}}
+			<button ion-item (click)="goToPage('profile')"
+				*ngIf="nav.getActive() && nav.getActive().name != 'ProfilePage'">
+				Profile
+			</button>
+			<button ion-item (click)="goToPage('home')"
+				*ngIf="nav.getActive() && nav.getActive().name != 'HomePage'">
+				Home
 			</button>
 		</ion-list>
 	</ion-content>
 
 </ion-menu>
 
-<ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false">
+<ion-nav #nav [root]="rootPage" #content swipeBackEnabled="false">
 
 </ion-nav>

@@ -26,7 +26,7 @@ export class LoginPage {
 
     this.appService.getStorage().getJson('id').then((data) => {
       if (data) {
-        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(HomePage);
       }
     }).catch((ex) => {
       console.error('Error fetching user', ex);
@@ -40,14 +40,6 @@ export class LoginPage {
     }
 
     this.appService.updateUser(this.user);
-    this.appService.getStorage().setJson('id', this.user);
-    this.navCtrl.push(HomePage);
-  }
-
-  goHome(data: any) {
-    if (data) {
-        console.info(JSON.stringify(data));
-        this.navCtrl.push(HomePage);
-    }
+    this.navCtrl.setRoot(HomePage);
   }
 }

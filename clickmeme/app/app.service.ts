@@ -19,6 +19,7 @@ export class AppService {
 
     updateUser(user: User): void {
         firebase.database().ref('users/' + user.deviceId).set(user);
+        this.local.setJson('id', user);
     }
 
     getStorage(): Storage {

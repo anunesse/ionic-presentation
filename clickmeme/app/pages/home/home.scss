@@ -1,0 +1,19 @@
+ion-content {
+    h3 {
+        width: 100%;
+        text-align: center;
+    }
+
+    ion-spinner {
+        width: 100%;
+        text-align: center;
+        margin-top: 50%;
+    }
+
+    div.minTime {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: 0;
+    }
+}

@@ -1,14 +1,15 @@
 <ion-header>
-	<ion-navbar>
+	<ion-toolbar>
+    	<ion-icon name="menu" menuToggle></ion-icon>
 		<ion-title>
-			Profile : {{login.pseudo}}
+			Profile
 		</ion-title>
-	</ion-navbar>
+  	</ion-toolbar>
 </ion-header>
 
-<ion-content>
-	<p>{{login.pseudo}}</p>
-	<p>{{login.avatar}}</p>
-	<p>{{login.deviceId}}</p>
-	<p>{{login.deviceProperties}}</p>
+<ion-content *ngIf="user">
+	<p>{{user.pseudo}}</p>
+	<p>{{user.avatar}}</p>
+	<p>{{user.deviceId}}</p>
+	<p>{{user.deviceProperties}}</p>
 </ion-content>
