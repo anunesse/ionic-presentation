@@ -23,7 +23,6 @@ export class LoginPage {
       
     } else { 
       this.user.deviceId = 'defaultweb00';
-      //this.user.avatar = 13;
     }
     this.user.avatar = this.appService.avatarFromDeviceId(this.user.deviceId);
 

@@ -1,16 +1,25 @@
 ion-content {
-    h3 {
+    h1, h3 {
         width: 100%;
         text-align: center;
+    }
+
+    h1 {
+        width: 100%;
+        text-align: center;
+        margin-top: 48%;
+    }
+
+    .best-time {
+        color: red;
     }
 
     ion-spinner {
         width: 100%;
         text-align: center;
-        margin-top: 50%;
     }
 
-    div.minTime {
+    div.min-time {
         position: absolute;
         width: 100%;
         text-align: center;

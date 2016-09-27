@@ -34,9 +34,11 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
+	<h1 *ngIf="out" [ngClass]="{'best-time': user.minTime === timer}">
+		<span *ngIf="user.minTime === timer">New record!</span> {{timer}} ms</h1>
 	<ion-spinner *ngIf="out"></ion-spinner>
 
-	<div *ngIf="user" class="minTime">
-		<p>Best time : {{user.minTime}}</p>
+	<div *ngIf="user" class="min-time">
+		<p>Best time : {{user.minTime}} ms</p>
 	</div>
 </ion-content>

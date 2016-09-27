@@ -1,7 +1,7 @@
 export class User {
     pseudo: string;
     deviceId: string;
-    avatar: number;
+    avatar: string;
     deviceProperties: string;
 
     minTime: number = 10000;
