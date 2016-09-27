@@ -1,0 +1,17 @@
+ion-content {
+    ion-card {
+        overflow: visible;
+        ion-card-header {
+            padding: 0px;
+            padding-bottom: 16px;
+        }
+        ion-card-content {
+            margin-bottom: -56px !important;
+        }
+        button {
+            position: relative !important;
+            bottom: -28px;
+            left: 80%;
+        }
+    }
+}

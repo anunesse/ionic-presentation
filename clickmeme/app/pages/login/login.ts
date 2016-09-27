@@ -20,9 +20,12 @@ export class LoginPage {
     this.user = new User();
     if (Device.device.uuid) {
       this.user.deviceId = Device.device.uuid;
+      
     } else { 
-      this.user.deviceId = 'defaultweb00'
+      this.user.deviceId = 'defaultweb00';
+      //this.user.avatar = 13;
     }
+    this.user.avatar = this.appService.avatarFromDeviceId(this.user.deviceId);
 
     this.appService.getStorage().getJson('id').then((data) => {
       if (data) {

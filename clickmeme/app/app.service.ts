@@ -25,4 +25,10 @@ export class AppService {
     getStorage(): Storage {
         return this.local;
     }
+
+    avatarFromDeviceId(str: string) {
+        return str.split('')
+            .map(function(x) { return x.charCodeAt(0)})
+            .reduce(function(p, c) {return p + c;}) % 32 + 1;
+    }
 }

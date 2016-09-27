@@ -8,8 +8,41 @@
 </ion-header>
 
 <ion-content *ngIf="user">
-	<p>{{user.pseudo}}</p>
-	<p>{{user.avatar}}</p>
-	<p>{{user.deviceId}}</p>
-	<p>{{user.deviceProperties}}</p>
+	<ion-card>
+		<ion-card-header>
+			<img src="{{user.avatar ? 'build/img/'+user.avatar+'.jpg' : 'build/img/13.jpg'}}">
+		</ion-card-header>
+		<ion-card-content>
+			<ion-list>
+				<ion-item>
+					<ion-label fixed>Pseudo</ion-label>
+					<ion-input type="text" value="{{user.pseudo}}"></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-icon name="bug" item-left></ion-icon>
+					{{user.deviceId}}
+				</ion-item>
+				<ion-item>
+					<ion-icon name="bug" item-left></ion-icon>
+					{{user.deviceProperties}}
+				</ion-item>
+				<ion-item>
+					<ion-icon name="clock" item-left></ion-icon>
+					{{user.minTime}}
+				</ion-item>
+				<ion-item>
+					<ion-icon name="bookmark" item-left></ion-icon>
+					{{user.points}}
+				</ion-item>
+				<ion-item>
+					<ion-icon name="finger-print" item-left></ion-icon>
+					{{user.click}}
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+		<button fab (click)="edit()">
+			<ion-icon name="create"></ion-icon>
+		</button>
+	</ion-card>
+
 </ion-content>

@@ -20,4 +20,8 @@ export class ProfilePage {
             console.error('Error fetching user', ex);
         });
     }
+
+    edit() {
+        this.appService.updateUser(this.user);
+    }
 }
