@@ -3,6 +3,7 @@ import { Platform, ionicBootstrap, NavController, MenuController } from 'ionic-a
 import { Splashscreen, Device } from 'ionic-native';
 import { LoginPage } from './pages/login/login';
 import { HomePage } from './pages/home/home';
+import { RankingPage } from './pages/ranking/ranking';
 import { ProfilePage } from './pages/profile/profile';
 import { AppService } from './app.service';
 
@@ -33,6 +34,9 @@ export class MyApp {
                 break;
             case 'home':
                 this.nav.setRoot(HomePage);
+                break;
+            case 'ranking':
+                this.nav.setRoot(RankingPage);
                 break;
             default:
                 break;

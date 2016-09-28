@@ -20,7 +20,10 @@ export class LoginPage {
     this.user = new User();
     if (Device.device.uuid) {
       this.user.deviceId = Device.device.uuid;
-      
+      this.user.deviceProperties = Device.device.platform + ", " +
+        Device.device.version + ", "
+        Device.device.model + ", "
+        Device.device.manufacturer;
     } else { 
       this.user.deviceId = 'defaultweb00';
     }

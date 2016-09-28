@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 import { User } from '../../model/user';
 import { AppService } from '../../app.service';
-
-declare var firebase: any;
 
 @Component({
   templateUrl: 'build/pages/profile/profile.html',

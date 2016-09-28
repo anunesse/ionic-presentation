@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-toolbar>
+    	<ion-icon name="menu" menuToggle></ion-icon>
+		<ion-title>
+			Ranking
+		</ion-title>
+  	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<!--<ion-segment [(ngModel)]="order">
+		<ion-segment-button value="points" (click)="up = !up; sort();">
+			<ion-icon name="arrow-dropup" [hidden]="order != 'points' || !up"></ion-icon>
+			<ion-icon name="arrow-dropdown" [hidden]="order != 'points' || up"></ion-icon>
+			Points
+		</ion-segment-button>
+		<ion-segment-button value="time" (click)="up = !up; sort();">
+			<ion-icon name="arrow-dropup" [hidden]="order != 'time' || !up"></ion-icon>
+			<ion-icon name="arrow-dropdown" [hidden]="order != 'time' || up"></ion-icon>
+			Time
+		</ion-segment-button>
+		<ion-segment-button value="clicks" (click)="up = !up; sort();">
+			<ion-icon name="arrow-dropup" [hidden]="order != 'clicks' || !up"></ion-icon>
+			<ion-icon name="arrow-dropdown" [hidden]="order != 'clicks' || up"></ion-icon>
+			Clicks
+		</ion-segment-button>
+	</ion-segment>-->
+
+	<ion-list>
+		<ion-item *ngFor="let user of users">
+			<ion-thumbnail item-left>
+				<img src="{{user.avatar ? 'build/img/'+user.avatar : 'build/img/13.jpg'}}">
+			</ion-thumbnail>
+			<h2>{{user.pseudo}}</h2>
+			<p>{{user.minTime}}ms • {{user.click}} clicks</p>
+			<h2 clear item-right>{{user.points}} points</h2>
+		</ion-item>
+	</ion-list>
+
+	<ion-spinner *ngIf="!users.length"></ion-spinner>
+</ion-content>

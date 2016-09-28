@@ -13,8 +13,12 @@ export class AppService {
         this.local = new Storage(LocalStorage);
     }
 
-    readUser(deviceId: string) {
-        
+    readUsers() {
+        return new Promise<any>((resolve, reject) => {
+            firebase.database().ref('users').orderByChild('points').once("value").then(function(snapshot) {
+                resolve(snapshot.val());
+            });
+        });
     }
 
     updateUser(user: User): void {
