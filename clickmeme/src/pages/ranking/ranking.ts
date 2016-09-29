@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { User } from '../../model/user';
-import { AppService } from '../../app.service';
-
-declare var firebase: any;
+import { User } from '../../app/model/user';
+import { AppService } from '../../app/app.service';
 
 @Component({
-  templateUrl: 'build/pages/ranking/ranking.html',
-  providers: [AppService]
+  templateUrl: 'ranking.html'
 })
 export class RankingPage {
     public users: User[] = new Array<User>();
     public order: string = 'points';
     public up: boolean = false;
 
-    constructor(private navCtrl: NavController, navParams: NavParams, private appService: AppService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService) {
         this.appService.readUsers().then(data => {
             Object.keys(data).forEach(element => {
                 this.users.push(data[element]);

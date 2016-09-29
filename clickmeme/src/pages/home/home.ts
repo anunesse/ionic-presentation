@@ -1,29 +1,25 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
-import { Device } from 'ionic-native';
-import { AppService } from '../../app.service';
+import { AppService } from '../../app/app.service';
 
-import { User } from '../../model/user';
-import { Grid } from '../../model/grid';
-
-declare var firebase: any;
+import { User } from '../../app/model/user';
+import { Grid } from '../../app/model/grid';
 
 @Component({
-  templateUrl: 'build/pages/home/home.html',
-  providers: [AppService, Device]
+  templateUrl: 'home.html'
 })
 export class HomePage {   
-    private date: number;
-    private timeout: any;
+    public date: number;
+    public timeout: any;
 
     public timer: number;
     public grid: Grid = new Grid();
     public user: User;
     public out: boolean = false;
 
-    constructor(private navCtrl: NavController, navParams: NavParams, private appService: AppService) {
-        this.appService.getStorage().getJson('id').then((data) => {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService) {
+        this.appService.getStorage().get('id').then((data) => {
             this.user = data;
             this.initGrid();
             this.date = new Date().getTime();
@@ -45,8 +41,8 @@ export class HomePage {
         do {
             lPicIndex = Math.floor((Math.random() * 32) + 1);
         } while(lPicIndex === wPicIndex);
-        this.grid.winPic = 'build/img/' + wPicIndex + '.jpg';
-        this.grid.loosePic = 'build/img/' + lPicIndex + '.jpg';
+        this.grid.winPic = 'assets/img/' + wPicIndex + '.jpg';
+        this.grid.loosePic = 'assets/img/' + lPicIndex + '.jpg';
     }
 
     win(i: number) {

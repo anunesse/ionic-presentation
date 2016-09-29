@@ -2,34 +2,30 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Device } from 'ionic-native';
-import { AppService } from '../../app.service';
-
-import { User } from '../../model/user';
-
-declare var firebase: any;
+import { AppService } from '../../app/app.service';
+import { User } from '../../app/model/user';
 
 @Component({
-  templateUrl: 'build/pages/login/login.html',
-  providers: [AppService, Device]
+  templateUrl: 'login.html'
 })
 export class LoginPage {
 
   public user: User;
 
-  constructor(private navCtrl: NavController, private appService: AppService) {
+  constructor(public navCtrl: NavController, public appService: AppService) {
     this.user = new User();
     if (Device.device.uuid) {
       this.user.deviceId = Device.device.uuid;
-      this.user.deviceProperties = Device.device.platform + ", " +
-        Device.device.version + ", "
-        Device.device.model + ", "
-        Device.device.manufacturer;
+      this.user.deviceProperties += Device.device.platform + ', ';
+      this.user.deviceProperties += Device.device.version + ', ';
+      this.user.deviceProperties += Device.device.model + ', ';
+      this.user.deviceProperties += Device.device.manufacturer;
     } else { 
       this.user.deviceId = 'defaultweb00';
     }
     this.user.avatar = this.appService.avatarFromDeviceId(this.user.deviceId);
 
-    this.appService.getStorage().getJson('id').then((data) => {
+    this.appService.getStorage().get('id').then((data) => {
       if (data) {
         this.navCtrl.setRoot(HomePage);
       }
