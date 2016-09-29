@@ -7,6 +7,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { RankingPage } from '../pages/ranking/ranking';
 import { AppService } from './app.service';
 import { Storage } from '@ionic/storage';
+import { Device } from 'ionic-native';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { Storage } from '@ionic/storage';
   ],
   providers: [
     AppService,
-    Storage
+    Storage,
+    Device
   ]
 })
 export class AppModule {}

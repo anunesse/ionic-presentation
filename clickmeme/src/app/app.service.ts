@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { LocalStorage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { User } from './model/user';
 
@@ -8,7 +7,10 @@ declare var firebase: any;
 @Injectable()
 export class AppService {
 
+    public user: User;
+
     constructor(public storage: Storage) {
+        this.user = new User();
     }
 
     readUsers() {
@@ -32,5 +34,12 @@ export class AppService {
         return str.split('')
             .map(function(x) { return x.charCodeAt(0)})
             .reduce(function(p, c) {return p + c;}) % 32 + 1 + '.jpg';
+    }
+
+    setUserInfo(uuid: string, infos: string[]) {
+        this.user.deviceId = uuid;
+        this.user.deviceProperties = infos;
+        this.user.avatar = this.avatarFromDeviceId(uuid);
+        this.storage.set('id', this.user);
     }
 }
