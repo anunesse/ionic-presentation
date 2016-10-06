@@ -1,0 +1,16 @@
+.navbar-brand img {
+    max-height: 30px;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+#container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.table-users {
+    margin: 20px 0;
+}

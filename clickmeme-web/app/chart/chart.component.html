@@ -1,0 +1,24 @@
+<div id="container"></div>
+
+<table *ngIf="users.length > 0" class="table table-striped table-bordered table-users">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Avatar</th>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Device ID</th>
+      <th>Click</th>
+      <th>Record (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+        <td class="text-xs-center"><img style="height:80px; width:80px;" src="{{user.avatar ? 'app/img/' + user.avatar : 'http://placehold.it/80x80'}}" class="img-rounded"/></td>
+        <td>{{user.pseudo}}</td>
+        <td>{{user.points}}</td>
+        <td>{{user.deviceId}}</td>
+        <td>{{user.click}}</td>
+        <td>{{user.minTime}}</td>
+    </tr>
+  </tbody>
+</table>
