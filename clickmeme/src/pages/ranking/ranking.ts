@@ -7,9 +7,9 @@ import { AppService } from '../../app/app.service';
   templateUrl: 'ranking.html'
 })
 export class RankingPage {
-    public users: User[] = new Array<User>();
-    public order: string = 'points';
-    public up: boolean = false;
+    users: User[] = new Array<User>();
+    order: string = 'points';
+    up: boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService) {
         this.appService.readUsers().then(data => {

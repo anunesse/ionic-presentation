@@ -1,29 +1,22 @@
 <ion-menu [content]="content">
 
-	<ion-toolbar>
-		<ion-title>Menu</ion-title>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Pages</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-	</ion-toolbar>
+  <ion-content>
+    <ion-list>
+      <template ngFor let-page [ngForOf]="pages">
+        <button ion-item (click)="openPage(page)">
+        {{page.title}}
+      </button>
+      </template>
 
-	<ion-content>
-		<ion-list>
-			<button ion-item (click)="goToPage('profile')"
-				*ngIf="nav.getActive() && nav.getActive().name != 'ProfilePage'">
-				Profile
-			</button>
-			<button ion-item (click)="goToPage('home')"
-				*ngIf="nav.getActive() && nav.getActive().name != 'HomePage'">
-				Home
-			</button>
-			<button ion-item (click)="goToPage('ranking')"
-				*ngIf="nav.getActive() && nav.getActive().name != 'RankingPage'">
-				Ranking
-			</button>
-		</ion-list>
-	</ion-content>
+    </ion-list>
+  </ion-content>
 
 </ion-menu>
 
-<ion-nav #nav [root]="rootPage" #content swipeBackEnabled="false">
-
-</ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

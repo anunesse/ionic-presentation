@@ -4,20 +4,29 @@ import { User } from '../../app/model/user';
 import { AppService } from '../../app/app.service';
 
 @Component({
-  templateUrl: 'profile.html'
+    templateUrl: 'profile.html'
 })
 export class ProfilePage {
-    public user: User;
-
+    user: User;
+    isEditing: boolean;
     constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService) {
-        this.appService.getStorage().get('id').then((data) => {
+        this.appService.getUser().then((data: User) => {
             this.user = data;
         }).catch((ex) => {
             console.error('Error fetching user', ex);
         });
     }
 
+    ionViewWillEnter() {
+        this.isEditing = false;
+    }
+
     edit() {
+        this.isEditing = true;
+    }
+
+    valid() {
+        this.isEditing = false;
         this.appService.updateUser(this.user);
     }
 }

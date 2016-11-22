@@ -9,58 +9,60 @@ import { Grid } from '../../app/model/grid';
 @Component({
   templateUrl: 'home.html'
 })
-export class HomePage {   
-    public date: number;
-    public timeout: any;
+export class HomePage {
+  date: number;
+  timeout: any;
 
-    public timer: number;
-    public grid: Grid = new Grid();
-    public user: User;
-    public out: boolean = false;
+  timer: number;
+  grid: Grid = new Grid();
+  user: User;
+  out: boolean = false;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService) {
-        this.appService.getStorage().get('id').then((data) => {
-            this.user = data;
-            this.initGrid();
-            this.date = new Date().getTime();
-        }).catch((ex) => {
-            console.error('Error fetching user', ex);
-        });
-    }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService) {
+    this.appService.getUser().then((data: User) => {
+      this.user = data;
+      this.initGrid();
+      this.date = new Date().getTime();
+    }).catch((ex) => {
+      console.error('Error fetching user', ex);
+    });
+  }
 
-    loop() {
-        this.initGrid();
-        this.date = new Date().getTime();
-        this.out = false;
-    }
 
-    initGrid() {
-        this.grid.winIndex = Math.floor((Math.random() * 9) + 1);
-        var wPicIndex = Math.floor((Math.random() * 32) + 1);
-        var lPicIndex;
-        do {
-            lPicIndex = Math.floor((Math.random() * 32) + 1);
-        } while(lPicIndex === wPicIndex);
-        this.grid.winPic = 'assets/img/' + wPicIndex + '.jpg';
-        this.grid.loosePic = 'assets/img/' + lPicIndex + '.jpg';
-    }
+  loop() {
+    this.initGrid();
+    this.date = new Date().getTime();
+    this.out = false;
+  }
 
-    win(i: number) {
-        if (i != this.grid.winIndex)
-            return;
-        this.out = true;
-        this.timeout = setTimeout(() => 
-            this.loop(), 3000
-        );
+  initGrid() {
+    this.grid.winIndex = Math.floor((Math.random() * 9) + 1);
+    var wPicIndex = Math.floor((Math.random() * 32) + 1);
+    var lPicIndex;
+    do {
+      lPicIndex = Math.floor((Math.random() * 32) + 1);
+    } while (lPicIndex === wPicIndex);
+    this.grid.winPic = 'assets/img/' + wPicIndex + '.jpg';
+    this.grid.loosePic = 'assets/img/' + lPicIndex + '.jpg';
+  }
 
-        this.timer = new Date().getTime() - this.date;
-        this.user.points += Math.floor(Math.max(0, 100 - this.timer / 20));
-        this.user.click += 1;
-        this.user.minTime = Math.min(this.user.minTime, this.timer);
-        this.appService.updateUser(this.user);
-    }
+  win(i: number) {
+    if (i != this.grid.winIndex)
+      return;
+    this.out = true;
+    this.timeout = setTimeout(() =>
+      this.loop(), 3000
+    );
 
-    goToProfilePage() {
-        this.navCtrl.push(ProfilePage);
-    }
+    this.timer = new Date().getTime() - this.date;
+
+    this.user.points += Math.floor(Math.max(0, 100 - this.timer / 20));
+    this.user.click += 1;
+    this.user.minTime = Math.min(this.user.minTime, this.timer);
+    this.appService.updateUser(this.user);
+  }
+
+  goToProfilePage() {
+    this.navCtrl.push(ProfilePage);
+  }
 }

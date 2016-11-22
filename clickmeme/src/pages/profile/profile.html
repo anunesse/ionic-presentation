@@ -1,10 +1,10 @@
 <ion-header>
-	<ion-toolbar>
-    	<ion-icon name="menu" menuToggle></ion-icon>
-		<ion-title>
-			Profile
-		</ion-title>
-  	</ion-toolbar>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Profile</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content *ngIf="user">
@@ -15,8 +15,8 @@
 		<ion-card-content>
 			<ion-list>
 				<ion-item>
-					<ion-label fixed>Pseudo</ion-label>
-					<ion-input type="text" value="{{user.pseudo}}"></ion-input>
+					<ion-icon name="person" item-left></ion-icon>
+					<ion-input type="text" [(ngModel)]="user.pseudo" value="{{user.pseudo}}" [disabled]="!isEditing"></ion-input>
 				</ion-item>
 				<ion-item>
 					<ion-icon name="bug" item-left></ion-icon>
@@ -24,7 +24,11 @@
 				</ion-item>
 				<ion-item>
 					<ion-icon name="bug" item-left></ion-icon>
-					{{user.deviceProperties.toString()}}
+					<ion-list>
+						<ion-item *ngFor="let prop of user.deviceProperties">
+							{{prop}}
+						</ion-item>
+					</ion-list>
 				</ion-item>
 				<ion-item>
 					<ion-icon name="clock" item-left></ion-icon>
@@ -40,8 +44,11 @@
 				</ion-item>
 			</ion-list>
 		</ion-card-content>
-		<button ion-button fab (click)="edit()">
+		<button *ngIf="!isEditing" ion-button fab (click)="edit()">
 			<ion-icon name="create"></ion-icon>
+		</button>
+		<button *ngIf="isEditing" ion-button fab (click)="valid()">
+			<ion-icon name="checkmark"></ion-icon>
 		</button>
 	</ion-card>
 

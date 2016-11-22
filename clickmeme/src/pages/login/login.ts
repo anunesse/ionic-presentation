@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Device } from 'ionic-native';
+import { NavController, Platform } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { AppService } from '../../app/app.service';
 import { User } from '../../app/model/user';
@@ -9,27 +10,39 @@ import { User } from '../../app/model/user';
 })
 export class LoginPage {
 
-  public user: User;
+  pseudo: string;
 
-  constructor(public navCtrl: NavController, public appService: AppService) {
-    this.user = new User();
-
-    this.appService.getStorage().get('id').then((data) => {
-      if (data) {
-        this.navCtrl.setRoot(HomePage);
-      }
-    }).catch((ex) => {
-      console.error('Error fetching user', ex);
+  constructor(public navCtrl: NavController, public appService: AppService, platform: Platform) {
+    platform.ready().then(() => {
+      this.appService.getUser().then(
+        (data: User) => {
+          if (data.pseudo) {
+            this.navCtrl.setRoot(HomePage);
+          }
+        },
+        (error) => {
+          if (error.code == 2) { //NativeStorageError.ITEM_NOT_FOUND
+            let infos = new Array<string>();
+            if (Device.device.platform) { infos.push(Device.device.platform) };
+            if (Device.device.version) { infos.push(Device.device.version); }
+            if (Device.device.model) { infos.push(Device.device.model); }
+            if (Device.device.manufacturer) { infos.push(Device.device.manufacturer); }
+            this.appService.createNewUser(Device.device.uuid ? Device.device.uuid : 'defaultweb00', infos);
+          } else {
+            console.error('Error fetching user', error);
+          }
+        }
+      )
     });
   }
 
   login() {
-    // Validate user.pseudo
-    if (this.user.pseudo === undefined || this.user.pseudo.trim().length === 0) {
-      return;
+    if (this.pseudo != undefined && this.pseudo.trim().length > 2) {
+      this.appService.getUser().then((user: User) => {
+        user.pseudo = this.pseudo;
+        this.appService.updateUser(user);
+        this.navCtrl.setRoot(HomePage);
+      })
     }
-
-    this.appService.updateUser(this.user);
-    this.navCtrl.setRoot(HomePage);
   }
 }

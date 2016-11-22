@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { NativeStorage } from 'ionic-native';
 import { User } from './model/user';
 
 declare var firebase: any;
@@ -7,10 +7,7 @@ declare var firebase: any;
 @Injectable()
 export class AppService {
 
-    public user: User;
-
-    constructor(public storage: Storage) {
-        this.user = new User();
+    constructor() {
     }
 
     readUsers() {
@@ -22,12 +19,18 @@ export class AppService {
     }
 
     updateUser(user: User): void {
-        firebase.database().ref('users/' + user.deviceId).set(user);
-        this.storage.set('id', user);
+        NativeStorage.setItem('id', user)
+        .then(
+            () => {
+                console.log('User stored!');
+                firebase.database().ref('users/' + user.deviceId).set(user);
+            },
+            error => console.error('Error storing user', error)
+        );
     }
 
-    getStorage(): Storage {
-        return this.storage;
+    getUser() {
+        return NativeStorage.getItem('id');
     }
 
     avatarFromDeviceId(str: string) {
@@ -36,10 +39,15 @@ export class AppService {
             .reduce(function(p, c) {return p + c;}) % 32 + 1 + '.jpg';
     }
 
-    setUserInfo(uuid: string, infos: string[]) {
-        this.user.deviceId = uuid;
-        this.user.deviceProperties = infos;
-        this.user.avatar = this.avatarFromDeviceId(uuid);
-        this.storage.set('id', this.user);
+    createNewUser(uuid: string, infos: string[]) {
+        let user = new User();
+        user.deviceId = uuid;
+        user.deviceProperties = infos;
+        user.avatar = this.avatarFromDeviceId(uuid);
+        this.updateUser(user);
     }
 }
+
+
+
+

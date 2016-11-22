@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
-import { Device } from 'ionic-native';
 
+import { Platform, MenuController, Nav } from 'ionic-angular';
+
+import { StatusBar } from 'ionic-native';
+
+import { AppService } from './app.service';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RankingPage } from '../pages/ranking/ranking';
 import { ProfilePage } from '../pages/profile/profile';
-import { AppService } from './app.service';
 
 declare var firebase: any;
 
@@ -15,51 +16,45 @@ declare var firebase: any;
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild(Nav) nav: Nav;
 
-  @ViewChild('nav') nav;
+  // make HelloIonicPage the root (or first) page
+  rootPage: any = LoginPage;
+  pages: Array<{ title: string, component: any }>;
 
-  rootPage = LoginPage;
+  constructor(
+    public platform: Platform,
+    public menu: MenuController,
+    public appService: AppService
+  ) {
+    this.initializeApp();
 
-  constructor(platform: Platform, public menuController: MenuController, appService: AppService) {
-    platform.ready().then(() => {
+    this.pages = [
+      { title: 'Profile', component: ProfilePage },
+      { title: 'Home', component: HomePage },
+      { title: 'Ranking', component: RankingPage }
+
+    ];
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
 
-      firebase.auth().signInAnonymously().catch(function(error) {
-                console.error(error.code);
-                console.error(error.message);
+      firebase.auth().signInAnonymously().catch(function (error) {
+        console.error(error.code);
+        console.error(error.message);
       });
 
-      appService.getStorage().get('id').then((data) => {
-        if (!data) {
-          let infos = new Array<string>();
-          if (Device.device.platform) {infos.push(Device.device.platform)};
-          if (Device.device.version) {infos.push(Device.device.version);}
-          if (Device.device.model) {infos.push(Device.device.model);}
-          if (Device.device.manufacturer) {infos.push(Device.device.manufacturer);}
-          appService.setUserInfo(Device.device.uuid ? Device.device.uuid : 'defaultweb00', infos);
-        }
-      }).catch((ex) => {
-        console.error('Error fetching user', ex);
-      });
     });
   }
 
-  goToPage(str: string) {
-        switch (str) {
-            case 'profile':
-                this.nav.setRoot(ProfilePage);
-                break;
-            case 'home':
-                this.nav.setRoot(HomePage);
-                break;
-            case 'ranking':
-                this.nav.setRoot(RankingPage);
-                break;
-            default:
-                break;
-        }
-        this.menuController.close();
-    }
+  openPage(page) {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    // navigate to the new page if it is not the current page
+    this.nav.setRoot(page.component);
+  }
 }

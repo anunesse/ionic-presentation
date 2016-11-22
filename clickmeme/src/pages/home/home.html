@@ -1,44 +1,47 @@
 <ion-header>
-	<ion-toolbar>
-    	<ion-icon name="menu" menuToggle></ion-icon>
-		<ion-title>
-			Home
-		</ion-title>
-  	</ion-toolbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
-	<h3 *ngIf="user">{{user.pseudo}} | {{user.points}}pts</h3>
-	<ion-grid *ngIf="!out">
-		<ion-row>
-			<ion-col *ngFor="let i of [1, 2, 3]" width-33>
-				<ion-card (click)="win(i)">
-					<img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
-				</ion-card>
-			</ion-col>
-		</ion-row>
 
-		<ion-row>
-			<ion-col *ngFor="let i of [4, 5, 6]" width-33>
-				<ion-card (click)="win(i)">
-					<img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
-				</ion-card>
-			</ion-col>
-		</ion-row>
+<ion-content padding>
 
-		<ion-row>
-			<ion-col *ngFor="let i of [7, 8, 9]" width-33>
-				<ion-card (click)="win(i)">
-					<img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
-				</ion-card>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
-	<h1 *ngIf="out" [ngClass]="{'best-time': user.minTime === timer}">
-		<span *ngIf="user.minTime === timer">New record!</span> {{timer}} ms</h1>
-	<ion-spinner *ngIf="out"></ion-spinner>
+  <h3 *ngIf="user">{{user.pseudo}} | {{user.points}}pts</h3>
+  <ion-grid *ngIf="!out">
+    <ion-row>
+      <ion-col *ngFor="let i of [1, 2, 3]" width-33>
+        <ion-card (click)="win(i)">
+          <img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-	<div *ngIf="user" class="min-time">
-		<p>Best time : {{user.minTime}} ms</p>
-	</div>
+    <ion-row>
+      <ion-col *ngFor="let i of [4, 5, 6]" width-33>
+        <ion-card (click)="win(i)">
+          <img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngFor="let i of [7, 8, 9]" width-33>
+        <ion-card (click)="win(i)">
+          <img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h1 *ngIf="out" [ngClass]="{'best-time': user.minTime === timer}">
+    <span *ngIf="user.minTime === timer">New record!</span> {{timer}} ms</h1>
+  <ion-spinner *ngIf="out"></ion-spinner>
+
+  <div *ngIf="user" class="min-time">
+    <p>Best time : {{user.minTime}} ms</p>
+  </div>
+
 </ion-content>
