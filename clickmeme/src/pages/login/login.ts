@@ -23,11 +23,11 @@ export class LoginPage {
         (error) => {
           if (error.code == 2) { //NativeStorageError.ITEM_NOT_FOUND
             let infos = new Array<string>();
-            if (Device.device.platform) { infos.push(Device.device.platform) };
-            if (Device.device.version) { infos.push(Device.device.version); }
-            if (Device.device.model) { infos.push(Device.device.model); }
-            if (Device.device.manufacturer) { infos.push(Device.device.manufacturer); }
-            this.appService.createNewUser(Device.device.uuid ? Device.device.uuid : 'defaultweb00', infos);
+            if (Device.platform) { infos.push(Device.platform) };
+            if (Device.version) { infos.push(Device.version); }
+            if (Device.model) { infos.push(Device.model); }
+            if (Device.manufacturer) { infos.push(Device.manufacturer); }
+            this.appService.createNewUser(Device.uuid ? Device.uuid : 'defaultweb00', infos);
           } else {
             console.error('Error fetching user', error);
           }
