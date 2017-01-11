@@ -53,7 +53,7 @@ export class Chart implements OnInit {
                             var user = JSON.parse(this.value);
                             return '<p class="text-center;"><br/><img style="height:80px; width:80px;" src="' 
                             + (user.avatar ? 'app/img/' + user.avatar : 'http://placehold.it/80x80') 
-                            + '" class="img-rounded"/><br/><br/>' + user.pseudo + '</p>';
+                            + '" class="img-rounded"/><br/><br/>' + (user.pseudo ? user.pseudo : 'John DOE') + '</p>';
                         }
                     }
                 },

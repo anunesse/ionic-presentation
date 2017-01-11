@@ -30,8 +30,8 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'Profile', component: ProfilePage },
       { title: 'Home', component: HomePage },
+      { title: 'Profile', component: ProfilePage },      
       { title: 'Ranking', component: RankingPage }
 
     ];

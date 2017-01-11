@@ -14,7 +14,7 @@
   <tbody>
     <tr *ngFor="let user of users">
         <td class="text-xs-center"><img style="height:80px; width:80px;" src="{{user.avatar ? 'app/img/' + user.avatar : 'http://placehold.it/80x80'}}" class="img-rounded"/></td>
-        <td>{{user.pseudo}}</td>
+        <td>{{user.pseudo ? user.pseudo : 'John DOE'}}</td>
         <td>{{user.points}}</td>
         <td>{{user.deviceId}}</td>
         <td>{{user.click}}</td>
