@@ -2,13 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
 
-import { StatusBar } from 'ionic-native';
+import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { AppService } from './app.service';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RankingPage } from '../pages/ranking/ranking';
 import { ProfilePage } from '../pages/profile/profile';
+import { PhotoPage } from '../pages/photo/photo';
 
 declare var firebase: any;
 
@@ -32,8 +33,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Profile', component: ProfilePage },      
-      { title: 'Ranking', component: RankingPage }
-
+      { title: 'Ranking', component: RankingPage },
+      { title: 'Photo', component: PhotoPage }
     ];
   }
 
@@ -42,7 +43,8 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-
+      Splashscreen.hide();
+      
       firebase.auth().signInAnonymously().catch(function (error) {
         console.error(error.code);
         console.error(error.message);

@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Photo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h1 *ngIf="user">{{user.pseudo}}</h1>
+  <p>Your photo!</p>
+</ion-content>
