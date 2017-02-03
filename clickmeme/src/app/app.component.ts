@@ -13,13 +13,20 @@ import { PhotoPage } from '../pages/photo/photo';
 
 declare var firebase: any;
 
+export const firebaseConfig = {
+			apiKey: "AIzaSyA3HJ2M9WKReoyevpm0lqon_AVnDMrlGAQ",
+			authDomain: "clickmeme-2f0a0.firebaseapp.com",
+			databaseURL: "https://clickmeme-2f0a0.firebaseio.com",
+			storageBucket: "clickmeme-2f0a0.appspot.com",
+			messagingSenderId: "510981237390"
+};
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
   rootPage: any = LoginPage;
   pages: Array<{ title: string, component: any }>;
 
@@ -44,6 +51,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      
+      firebase.initializeApp(firebaseConfig);
       
       firebase.auth().signInAnonymously().catch(function (error) {
         console.error(error.code);
