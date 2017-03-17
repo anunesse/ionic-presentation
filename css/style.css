@@ -1,0 +1,24 @@
+.tag {
+    font-size: 22px !important;
+    padding: 4px !important;
+}
+
+.tag-crosscompiled {
+    background-color: #5392ee;
+}
+
+.tag-runtime {
+    background-color: #54ee70;
+}
+
+.tag-webview {
+    background-color: #ee7e2e;
+}
+
+.reveal section img.ionicvsreact {
+    position: absolute !important;
+    top: -280px !important;
+    left: -180px !important;
+    width: 200px !important;
+    border-width: 0.5px!important;
+}
