@@ -52,7 +52,7 @@ export class Chart implements OnInit {
                         formatter: function () {
                             var user = JSON.parse(this.value);
                             return '<p class="text-center;"><br/><img style="height:80px; width:80px;" src="' 
-                            + (user.avatar ? 'app/img/' + user.avatar : 'http://placehold.it/80x80') 
+                            + (user.avatar ? 'https://firebasestorage.googleapis.com/v0/b/clickmeme-2f0a0.appspot.com/o/images%2F' + user.avatar + '?alt=media': 'http://placehold.it/80x80')
                             + '" class="img-rounded"/><br/><br/>' + (user.pseudo ? user.pseudo : 'John DOE') + '</p>';
                         }
                     }
