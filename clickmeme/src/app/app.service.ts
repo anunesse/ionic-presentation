@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NativeStorage, File } from 'ionic-native';
+import { NativeStorage, File, Device } from 'ionic-native';
 import { User } from './model/user';
 
 declare var firebase: any;
@@ -12,21 +12,37 @@ export class AppService {
 
     readUsers() {
         return new Promise<any>((resolve, reject) => {
-            firebase.database().ref('users').orderByChild('points').once("value").then(function (snapshot) {
-                resolve(snapshot.val());
-            });
+            firebase.database().ref('users').orderByChild('points').once("value").then(
+                snapshot => resolve(snapshot.val()),
+                error => reject(error));
         });
     }
 
-    updateUser(user: User): void {
-        NativeStorage.setItem('id', user)
-            .then(
-            () => {
-                console.log('User stored!');
-                firebase.database().ref('users/' + user.deviceId).set(user);
-            },
-            error => console.error('Error storing user', error)
-            );
+    private readUser(deviceId: string) {
+        return new Promise<User>((resolve, reject) => {
+            if (deviceId) {
+                firebase.database().ref('users/' + deviceId).once("value").then(
+                    snapshot => snapshot.val() ? resolve(snapshot.val()) : reject("Not present in database"),
+                    error => reject(error));
+            } else {
+                reject("not a device");
+            }
+        });
+    }
+
+    updateUser(user: User) {
+        return new Promise<User>((resolve, reject) => {
+            NativeStorage.setItem('id', user).then(
+                () => {
+                    console.log('User stored!');
+                    firebase.database().ref('users/' + user.deviceId).set(user);
+                    resolve(user);
+                },
+                error => {
+                    console.error('Error storing user', error);
+                    reject(error);
+                });
+        });
     }
 
     updateAvatar(user: User) {
@@ -60,6 +76,36 @@ export class AppService {
         return NativeStorage.getItem('id');
     }
 
+    initUser() {
+        return new Promise<User>((resolve, reject) => {
+            this.getUser().then(
+                user => {
+                    console.log('From Storage', user);
+                    resolve(user);
+                },
+                error => this.readUser(Device.uuid).then(
+                    user => {
+                        console.log('From firebase', user);
+                        this.updateUser(user);
+                        resolve(user);
+                    },
+                    error => {
+                        console.log('New User');
+                        let infos = new Array<string>();
+                        if (Device.platform) { infos.push(Device.platform) };
+                        if (Device.version) { infos.push(Device.version); }
+                        if (Device.model) { infos.push(Device.model); }
+                        if (Device.manufacturer) { infos.push(Device.manufacturer); }
+                        this.createNewUser(Device.uuid ? Device.uuid : 'defaultweb00', infos).then(
+                            user => resolve(user),
+                            error => reject(error)
+                        );
+                    }
+                )
+            );
+        });
+    }
+
     avatarFromDeviceId(str: string) {
         return str.split('')
             .map(function (x) { return x.charCodeAt(0) })
@@ -71,7 +117,7 @@ export class AppService {
         user.deviceId = uuid;
         user.deviceProperties = infos;
         user.avatar = this.avatarFromDeviceId(uuid);
-        this.updateUser(user);
+        return this.updateUser(user);
     }
 }
 
