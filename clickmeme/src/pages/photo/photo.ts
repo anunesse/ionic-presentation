@@ -17,4 +17,8 @@ export class PhotoPage {
             console.error('Error fetching user', ex);
         });
     }
+
+    uploadAvatar() {
+        this.appService.updateAvatar(this.user);
+    }
 }

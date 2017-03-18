@@ -21,12 +21,6 @@ export class RankingPage {
     }
 
     getAvatar(user: User) {
-        let url;
-        if(user.avatar) {
-            url = 'https://firebasestorage.googleapis.com/v0/b/clickmeme-2f0a0.appspot.com/o/images%2F' + user.avatar + '?alt=media';
-        } else {
-            url = 'assets/img/13.jpg';
-        }
-        return url;
+       return this.appService.getAvatar(user);
     }
 }

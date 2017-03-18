@@ -5,6 +5,9 @@ ion-content {
             padding: 0px;
             padding-bottom: 16px;
         }
+        ion-card-header {
+            margin-bottom: -56px !important;
+        }
         ion-card-content {
             margin-bottom: -56px !important;
         }
@@ -12,6 +15,10 @@ ion-content {
             position: relative !important;
             bottom: -28px;
             left: 80%;
+
+            &.avatar-button {
+                bottom: 50px;
+            }
         }
     }
 }

@@ -10,17 +10,16 @@
 <ion-content *ngIf="user">
 	<ion-card>
 		<ion-card-header>
-			<img src="{{user.avatar ? 'assets/img/'+user.avatar : 'assets/img/13.jpg'}}">
+			<img src="{{getAvatar(user)}}" />
+			<button ion-button fab (click)="editAvatar()" class="avatar-button">
+				<ion-icon name="create"></ion-icon>
+			</button>
 		</ion-card-header>
 		<ion-card-content>
 			<ion-list>
 				<ion-item>
 					<ion-icon name="person" item-left></ion-icon>
 					<ion-input type="text" [(ngModel)]="user.pseudo" value="{{user.pseudo}}" [disabled]="!isEditing"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-icon name="bug" item-left></ion-icon>
-					{{user.deviceId}}
 				</ion-item>
 				<ion-item>
 					<ion-icon name="bug" item-left></ion-icon>
@@ -32,15 +31,15 @@
 				</ion-item>
 				<ion-item>
 					<ion-icon name="clock" item-left></ion-icon>
-					{{user.minTime}}
+					{{user.minTime}} ms
 				</ion-item>
 				<ion-item>
 					<ion-icon name="bookmark" item-left></ion-icon>
-					{{user.points}}
+					{{user.points}} pts
 				</ion-item>
 				<ion-item>
 					<ion-icon name="finger-print" item-left></ion-icon>
-					{{user.click}}
+					{{user.click}} clicks
 				</ion-item>
 			</ion-list>
 		</ion-card-content>

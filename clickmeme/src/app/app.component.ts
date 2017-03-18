@@ -9,7 +9,6 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RankingPage } from '../pages/ranking/ranking';
 import { ProfilePage } from '../pages/profile/profile';
-import { PhotoPage } from '../pages/photo/photo';
 
 declare var firebase: any;
 
@@ -40,8 +39,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Profile', component: ProfilePage },      
-      { title: 'Ranking', component: RankingPage },
-      { title: 'Photo', component: PhotoPage }
+      { title: 'Ranking', component: RankingPage }
     ];
   }
 

@@ -9,5 +9,5 @@
 
 <ion-content>
   <h1 *ngIf="user">{{user.pseudo}}</h1>
-  <p>Your photo!</p>
+  <p (click)="uploadAvatar()">Your photo!</p>
 </ion-content>
