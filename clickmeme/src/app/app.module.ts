@@ -3,7 +3,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AppService } from './app.service';
-import { Storage } from '@ionic/storage';
 import { Device } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
@@ -35,7 +34,6 @@ import { PhotoPage } from '../pages/photo/photo';
   ],
   providers: [
     AppService,
-    Storage,
     Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

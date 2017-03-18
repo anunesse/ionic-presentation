@@ -29,7 +29,7 @@
 	<ion-list>
 		<ion-item *ngFor="let user of users">
 			<ion-thumbnail item-left>
-				<img src="{{user.avatar ? 'assets/img/'+user.avatar : 'assets/img/13.jpg'}}">
+				<img src="{{getAvatar(user)}}">
 			</ion-thumbnail>
 			<h2>{{user.pseudo}}</h2>
 			<p>{{user.minTime}}ms • {{user.click}} clicks</p>
