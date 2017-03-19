@@ -1,0 +1,11 @@
+{
+	"android": {
+		"release": {
+			"keystore": "keys/clickmeme.keystore",
+			"storePassword": "ebiz2017",
+			"alias": "clickmeme",
+			"password": "ebiz2017",
+			"keystoreType": ""
+		}
+	}
+}
