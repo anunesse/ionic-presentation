@@ -4,7 +4,7 @@
 #### Requirements
 * Node : 6.9.2 (npm)
 * Android : Android SDK, $ANDROID_HOME
-* IOS : XCode, ios-deploy
+* IOS : XCode, npm install -g ios-deploy
 * npm install -g cordova ionic
 * For e2e testing: npm install -g wd appium protractor
 
@@ -16,7 +16,7 @@
 * ionic run android (or ios)
 
 #### Livecoding
-...
+* ionic plugin add cordova-plugin-camera
 
 #### E2e testing
 * In a separate terminal, run appium: `appium`
