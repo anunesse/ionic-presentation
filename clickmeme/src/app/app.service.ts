@@ -45,21 +45,17 @@ export class AppService {
         });
     }
 
-    updateAvatar(user: User) {
-        var avatarRef = firebase.storage().ref().child('images/' + user.deviceId);
-        File.readAsDataURL(File.applicationDirectory, 'www/assets/img/camera.png')
-            .then(data => {
-                console.log('asText', data);
-                avatarRef.putString(data, 'data_url').then(
-                    snapshot => {
-                        console.log('Avatar Uploaded!');
-                        user.avatar = user.deviceId;
-                        this.updateUser(user);
-                    },
-                    error => console.error('Error uploading avatar', error)
-                );
-            })
-            .catch(err => console.log('Cannot read file...', err));
+    updateAvatar(user: User, base64Img: String) {
+        let date = Date.now();
+        let avatarRef = firebase.storage().ref().child('images/' + user.deviceId + date);
+        avatarRef.putString(base64Img, 'data_url').then(
+            snapshot => {
+                console.log('Avatar Uploaded!');
+                user.avatar = user.deviceId + date;
+                this.updateUser(user);
+            },
+            error => console.error('Error uploading avatar', error)
+        ).catch(err => console.log('Cannot read file...', err));
     }
 
     getAvatar(user: User) {

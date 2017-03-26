@@ -40,7 +40,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-nativestorage",
     "cordova-plugin-file",
-    "cordova-plugin-compat"
+    "cordova-plugin-compat",
+    "cordova-plugin-camera"
   ],
   "cordovaPlatforms": [
     {
