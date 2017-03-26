@@ -22,3 +22,9 @@
     width: 200px !important;
     border-width: 0.5px!important;
 }
+
+.reveal img.service-icon {
+    height: 50px;
+    margin-right: 20px;
+    vertical-align: middle;
+}
