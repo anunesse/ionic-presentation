@@ -15,7 +15,7 @@
     <ion-row>
       <ion-col *ngFor="let i of [1, 2, 3]" width-33>
         <ion-card (click)="win(i)">
-          <img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
+          <img class="{{grid.winIndex === i ? 'winPic' : 'loosePic'}}" src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
         </ion-card>
       </ion-col>
     </ion-row>
@@ -23,7 +23,7 @@
     <ion-row>
       <ion-col *ngFor="let i of [4, 5, 6]" width-33>
         <ion-card (click)="win(i)">
-          <img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
+          <img class="{{grid.winIndex === i ? 'winPic' : 'loosePic'}}" src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
         </ion-card>
       </ion-col>
     </ion-row>
@@ -31,7 +31,7 @@
     <ion-row>
       <ion-col *ngFor="let i of [7, 8, 9]" width-33>
         <ion-card (click)="win(i)">
-          <img src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
+          <img class="{{grid.winIndex === i ? 'winPic' : 'loosePic'}}" src="{{grid.winIndex === i ? grid.winPic : grid.loosePic}}">
         </ion-card>
       </ion-col>
     </ion-row>
