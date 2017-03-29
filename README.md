@@ -4,12 +4,13 @@
 #### Requirements
 * Node : 6.9.2 (npm)
 * Android : Android SDK, $ANDROID_HOME
-* IOS : XCode, npm install -g ios-deploy
+* IOS : XCode, sudo npm install --global --unsafe-perm --allow-root ios-deploy
 * npm install -g cordova ionic
 * For e2e testing: npm install -g wd appium protractor
 
 #### Install
 * cd clickmeme/
+* mkdir www
 * npm install
 * ionic platform add android (or ios)
 * ionic state restore
